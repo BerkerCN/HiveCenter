@@ -1,0 +1,43 @@
+name: 🐛 Bug Report
+description: Create a report to help us improve the framework
+title: '[BUG]: '
+labels: ['bug', 'triage']
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report for HiveCenter.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Description
+      description: A clear and concise description of the behavior. Also tell us what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: |
+        1. Initialize the framework environment ('...')
+        2. Execute the input parameter ('...')
+        3. Observe the exception
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Failing System Component
+      options:
+        - Architecture Node
+        - Execution Node
+        - Analysis Node
+        - Core/Networking
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Configuration
+      description: OS version, Python Version, and Active LLM Runtime (e.g. Qwen2.5-Coder:7b)
+    validations:
+      required: true

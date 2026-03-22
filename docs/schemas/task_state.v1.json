@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hivecenter.local/schemas/task_state.v1.json",
+  "title": "HiveCenter run checkpoint",
+  "type": "object",
+  "required": ["run_id", "goal", "iteration", "phase", "updated_at"],
+  "properties": {
+    "run_id": { "type": "string", "format": "uuid" },
+    "goal": { "type": "string" },
+    "test_command": { "type": ["string", "null"] },
+    "iteration": { "type": "integer", "minimum": 1 },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "planning",
+        "executing",
+        "verifying",
+        "completed",
+        "failed",
+        "paused"
+      ]
+    },
+    "current_context": { "type": "string" },
+    "last_perfection": { "type": ["integer", "null"], "minimum": 0, "maximum": 100 },
+    "updated_at": { "type": "string" }
+  }
+}

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  hivecenter:
+    build: .
+    container_name: hivecenter_engine
+    network_mode: "host"  # Host network is required so agents can access http://localhost:XXX from user projects
+    volumes:
+      - ~/.hivecenter_config.json:/root/.hivecenter_config.json
+      - ~/.hivecenter_memory:/root/.hivecenter_memory
+      # Mount the generic local workspace directory into the container so agents can write code
+      - ./workspace:/workspace
+    environment:
+      - PYTHONUNBUFFERED=1
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    restart: unless-stopped

@@ -1,0 +1,23 @@
+You are developing HiveCenter, an autonomous multi-agent AI factory.
+
+PROJECT STRUCTURE:
+- bin/hive_server.py: Flask backend (orchestration); imports hivecenter/* (policy, tools, audit, state).
+- config.json: Roots, shell limits, models, verify.test_command, run thresholds.
+- hivecenter/: config, policy, audit, tools (+PATCH, SEMANTIC, approvals_store, patch_apply, embeddings, health_gpu, shell_safe), checkpoint, memory_store.
+- dashboard/index.html: React/Tailwind frontend.
+- workspace/: Agent work; logs/audit.ndjson; .hive/run_*.json checkpoints; memory.json.
+- docs/ROADMAP.md, docs/THREAT_MODEL.md — start.sh launches the server.
+
+CORE PHILOSOPHY:
+- Recursive Self-Improvement: Agents must check their own work.
+- The "Perfection Filter": Work must be refined until it reaches a low improvement score (perfection > 71%).
+- Local First: Always prioritize utilizing the local Ollama models over cloud APIs.
+
+DEVELOPMENT GOALS:
+1. Enhance the dashboard with real-time VRAM/GPU monitoring (use the 'healthcheck' skill concept).
+2. Improve the regex parsers in hive_server.py to handle more complex agent commands.
+3. Memory: workspace/memory.json — API GET/POST /api/memory; runs complete → append_entry.
+
+Autonomy: prompts in hivecenter/prompts.py; Ollama options in config ollama.*; inspector feedback chains to architect next iteration.
+
+Always read hive_server.py before making backend changes.

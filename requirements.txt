@@ -1,0 +1,12 @@
+# HiveCenter runtime (Flask API + agent tooling)
+flask>=3.0,<4
+flask-cors>=4.0,<5
+
+# Browser / web (hivecenter/browser.py, web.py)
+playwright>=1.40,<2
+beautifulsoup4>=4.12,<5
+markdownify>=0.13.1,<1
+duckduckgo-search>=6.0,<8
+
+# Optional TTS (hivecenter/voice.py)
+gTTS>=2.5,<3

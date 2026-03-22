@@ -1,0 +1,34 @@
+name: ✨ Feature Request
+description: Propose an architectural enhancement or new module integration
+title: '[FEATURE]: '
+labels: ['enhancement', 'core-logic']
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting an enhancement to the orchestration framework.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Related Problem Context
+      description: Please provide a clear and concise description of the limitation this feature addresses.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Implementation
+      description: A clear and concise description of the system behavior you want to introduce.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Component Category
+      options:
+        - Inference Capabilities
+        - Framework API Integration
+        - Dashboard/GUI
+        - Containerization / Execution Engine
+        - Other

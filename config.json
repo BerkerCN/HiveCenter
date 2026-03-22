@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "god_mode": true,
+  "workspace_root": "~/Projeler/HiveCenter/workspace",
+  "allowed_roots": [
+    "~/Projeler/HiveCenter/workspace"
+  ],
+  "forbidden_path_substrings": [".ssh", "/etc/", "/root/", "/sys/", "/proc/"],
+  "read_max_bytes": 786432,
+  "shell": {
+    "approval_triggers": ["apt ", "dnf ", "pacman "],
+    "timeout_sec": 600,
+    "max_output_bytes": 393216,
+    "deny_substrings": [
+      "rm -rf /",
+      "mkfs",
+      "dd if=",
+      ":(){ :|:& };:",
+      "curl ",
+      "wget ",
+      "sudo ",
+      "su -",
+      "chmod 777 /",
+      ">/dev/sd"
+    ]
+  },
+  "run": {
+    "max_iterations": 16,
+    "perfection_threshold": 72
+  },
+  "verify": {
+    "test_command": null,
+    "require_pass_for_done": false
+  },
+  "models": {
+    "architect": "deepseek-r1:8b",
+    "coder": "qwen2.5-coder:14b",
+    "inspector": "deepseek-r1:8b",
+    "coder_fallback_8gb": "qwen2.5-coder:7b"
+  },
+  "audit": {
+    "log_path": "logs/audit.ndjson",
+    "redact": true
+  },
+  "search": {
+    "max_matches": 120,
+    "timeout_sec": 25
+  },
+  "glob": {
+    "max_matches": 320
+  },
+  "patch": {
+    "enabled": true
+  },
+  "semantic": {
+    "enabled": true,
+    "embed_model": "nomic-embed-text",
+    "max_files_scan": 64,
+    "max_file_bytes": 150000,
+    "top_k": 14
+  },
+  "ollama": {
+    "temperature": 0.35,
+    "top_p": 0.92,
+    "num_ctx": 8192,
+    "num_predict": 6144,
+    "request_timeout_sec": 900,
+    "strip_reasoning_tags": true,
+    "architect": { "temperature": 0.42, "num_ctx": 8192, "num_predict": 6144 },
+    "coder": { "temperature": 0.18, "num_ctx": 8192, "num_batch": 256, "num_predict": 8192 },
+    "inspector": { "temperature": 0.28, "num_ctx": 8192, "num_predict": 4096 }
+  },
+  "autonomy": {
+    "max_observation_chars": 28000,
+    "append_agent_state_md": true,
+    "inject_agent_state_tail": true,
+    "agent_state_max_bytes": 6000
+  },
+  "cursor_master": {
+    "enabled": true,
+    "root": "~/Projeler/CursorMaster",
+    "max_skill_bytes": 120000,
+    "search_max": 22
+  },
+  "hints": {
+    "ollama_pull_coder": "ollama pull qwen2.5-coder:14b",
+    "ollama_if_oom": "VRAM yetmezse: models.coder -> qwen2.5-coder:7b veya ollama.coder.num_ctx -> 4096; ayrıca OLLAMA_NUM_CTX=4096 ortam değişkeni.",
+    "ollama_cpu_offload": "Tam GPU sığmazsa Ollama katmanları otomatik CPU'ya taşır (daha yavaş). Swap açık olması yardımcı olur."
+  },
+  "ui": {
+    "goal_templates": [
+      {
+        "id": "bugfix",
+        "label": "Hata düzeltme",
+        "goal": "Açıklanan hatayı kod tabanında düzelt; mevcut davranışı ve testleri mümkün olduğunca koru.",
+        "test_command": ""
+      },
+      {
+        "id": "feature",
+        "label": "Özellik",
+        "goal": "İstenen özelliği küçük adımlarla uygula; her adımda derlenebilir/koşulabilir durumda bırak.",
+        "test_command": ""
+      },
+      {
+        "id": "refactor",
+        "label": "Refactor",
+        "goal": "Belirtilen modülü okunabilir ve test edilebilir hale getir; dış API ve davranışı koru.",
+        "test_command": ""
+      },
+      {
+        "id": "tests",
+        "label": "Test suite",
+        "goal": "Eksik birim testlerini ekle; mevcut test suite'in geçmesini sağla.",
+        "test_command": "pytest -q"
+      },
+      {
+        "id": "docs",
+        "label": "Dokümantasyon",
+        "goal": "README ve ilgili modüller için güncel kullanım / kurulum dokümantasyonu yaz.",
+        "test_command": ""
+      },
+      {
+        "id": "evolve",
+        "label": "Otonom geliştir",
+        "goal": "Projeyi kullanıcıya sormadan geliştir: repoda tarama yap, bir sonraki değerli iyileştirmeyi (özellik, test, UX, güvenlik, performans) seç, uygula, test et; çalışıyorsa bir sonraki iterasyonda yeni bir iyileştirme planla.",
+        "test_command": ""
+      },
+      {
+        "id": "deepen",
+        "label": "Derin kalite",
+        "goal": "Kod tabanını SEMANTIC/SEARCH/LSP ile tarayıp teknik borç, hata riski ve test açıklarını tespit et; en yüksek etkili düzeltmeleri uygula, testleri çalıştır, kısa özet ver.",
+        "test_command": ""
+      }
+    ]
+  }
+}

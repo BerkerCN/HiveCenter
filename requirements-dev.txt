@@ -1,0 +1,2 @@
+# Development and CI (not required for production runtime)
+pytest>=7.0,<9
